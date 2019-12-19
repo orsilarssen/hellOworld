@@ -1,12 +1,12 @@
 pipeline {
   agent any
   environment {
-    registry = "greenfox/orsilarssen"
+    registry = "orsilarssen/helloworld"
     registryCredential = 'orsilarssen'
     dockerImage = ''
-    ENV_NAME = "hellOworld"
+    ENV_NAME = "Helloworldol-env"
     S3_BUCKET = "elasticbeanstalk-eu-central-1-124429370407"
-    APP_NAME = 'Hello, World!'
+    APP_NAME = 'helloworldol'
   }
   stages {
     stage('Build') {
