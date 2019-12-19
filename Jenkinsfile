@@ -4,9 +4,9 @@ pipeline {
     registry = "orsilarssen/helloworld"
     registryCredential = 'orsilarssen'
     dockerImage = ''
-    ENV_NAME = "Helloworldol-env"
+    ENV_NAME = "Helloworldol85-env"
     S3_BUCKET = "elasticbeanstalk-eu-central-1-124429370407"
-    APP_NAME = 'helloworldol'
+    APP_NAME = 'helloworldol85'
   }
   stages {
     stage('Build') {
