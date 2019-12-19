@@ -45,7 +45,7 @@ pipeline {
           sh 'aws elasticbeanstalk update-environment \
           --application-name "$APP_NAME" \
           --environment-name $ENV_NAME \
-          --version-label devma-Dev-$BUILD_ID'
+          --version-label helloworld-$BUILD_ID'
         }
       }
     }
