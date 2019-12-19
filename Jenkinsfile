@@ -4,7 +4,7 @@ pipeline {
     registry = "greenfox/orsilarssen"
     registryCredential = 'orsilarssen'
     dockerImage = ''
-    ENV_NAME = "Devma-dev"
+    ENV_NAME = "hellOworld"
     S3_BUCKET = "elasticbeanstalk-eu-central-1-124429370407"
     APP_NAME = 'Hello, World!'
   }
@@ -20,7 +20,7 @@ pipeline {
       }
       steps {
         script {
-          dockerImage = docker.build registry + ":dev-latest"
+          dockerImage = docker.build registry + ":latest"
         }
         script {
           docker.withRegistry( '', registryCredential ) {
@@ -31,15 +31,15 @@ pipeline {
     }
     stage('Deploy to AWS') {
       when{
-          branch 'develop'
+          branch 'master'
       }
       steps {
-        withAWS(credentials:'devma-staging ', region: 'eu-west-2') {
-          sh 'aws s3 cp ./DevDockerrun.aws.json \
+        withAWS(credentials:'awsmalachite2', region: 'eu-central-1') {
+          sh 'aws s3 cp ./Dockerrun.aws.json \
           s3://$S3_BUCKET/$BUILD_ID/Dockerrun.aws.json'
           sh 'aws elasticbeanstalk create-application-version \
           --application-name "$APP_NAME" \
-          --version-label devma-Dev-$BUILD_ID \
+          --version-label $BUILD_ID \
           --source-bundle S3Bucket="$S3_BUCKET",S3Key="$BUILD_ID/Dockerrun.aws.json" \
           --auto-create-application'
           sh 'aws elasticbeanstalk update-environment \
